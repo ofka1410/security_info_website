@@ -1,0 +1,36 @@
+.nav_link,.num-length{
+    color:white;
+    text-decoration:none;
+    font-size:20px !important;
+}
+
+.git-headers{
+    color:white;
+    width:500px;
+    margin:auto;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+}
+.git-paper{
+    width: 1000px;
+    background-color: #e7e7ee;
+    padding: 50px;
+    text-align: left;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; 
+}
+.list-grid{
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    border-bottom: 1px solid rgb(5, 38, 73);
+    padding: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.sub-nav-links{
+    display: flex;
+    justify-content: space-evenly;
+}
+.num-length{
+    margin-right: 10px;
+    color: rgb(104, 110, 172)
+}
