@@ -67,32 +67,11 @@ useEffect(() => {
 
     return (
         <div>
-          <div style={{backgroundColor: '#8c8e91'}} className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar style={{display:'flex',justifyContent:'space-between'}}>
-        <div>
-        <Typography variant="h5" noWrap>
-           Github  <span><GitHubIcon/></span>
-          </Typography>
-        </div>
-          <Dashboard_back/>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor="left"
-      >
-        <div className={classes.toolbar} />
-        <Divider />
+       
         <List className='sub-nav-links'>
             <ListItem button >
            <a onClick={()=>{change_context(gitrepo,'Git Repository')}} className='nav_link'    exact
-            activeClassName="navbar__link--active">Git Repository</a>
+            activeClassName="link--active">Git Repository</a>
             </ListItem>
           
         </List>
@@ -122,9 +101,8 @@ useEffect(() => {
         </List>
         <Divider />
     
-    <Side_icons/>
-      </Drawer>
-      <main className={classes.content}>
+      
+
       <div className='git-paper'>
       <h1 style={{color:'#4d4e4f'}}>{title}</h1> 
        {
@@ -135,21 +113,21 @@ useEffect(() => {
                   return(
                       
                      <Grid className='list-grid'>
-                      <Typography className='git-headers' variant="p" component="p">
-                        <a style={{ textDecoration:'none'}} href={item}>{item}</a>
+                      <Typography style={{color:'#637296'}} className='git-headers' variant="p" component="p">
+                        <a tyle={{color:'#637296',marginBottom:'10px',fontWeight:'700',textDecoration:'none'}} href={item}>{item}</a>
                       </Typography> 
                      </Grid>
  
                 )
               })
        
-       :<h2 style={{color:'#4d4e4f'}}>Choose one of the results on the side bar</h2>}
+       :<h2 style={{color:'#4d4e4f'}}>Choose one of the results </h2>}
            </div>  
-      </main>
+      
     </div>
         
          
               
-        </div>
+       
     )
 }

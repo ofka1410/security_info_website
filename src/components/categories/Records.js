@@ -1,99 +1,203 @@
 import React,{useContext,useEffect} from 'react'
-import { makeStyles, Drawer,CssBaseline
-,AppBar,Toolbar,List,Typography,Divider,ListItem,ListItemIcon,ListItemText } from '@material-ui/core';
-import { Grid } from '@material-ui/core';
 import '../../css/github.css'
 import Dashboard_back from '../Dashboard_back'
 import {context} from '../../UseContext'
 
-const drawerWidth = 300;
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-   
-  },
-  appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    backgroundColor:"#2c3138",
-     display:'flex',
-    justifyContent:'space-bitween'
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-   
-    textAlign:'center'
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import FolderIcon from '@mui/icons-material/Folder';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
-  },
-  // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    backgroundColor:'rgb(1, 29, 41)',
-    padding: theme.spacing(3),
-   
-  
-  },
+function generate(element) {
+  return [0, 1, 2].map((value) =>
+    React.cloneElement(element, {
+      key: value,
+    }),
+  );
+}
+
+const Demo = styled('div')(({ theme }) => ({
+  backgroundColor: theme.palette.background.paper,
 }));
 
+
 export default function Records() {
-   const {records}= useContext(context)
-    const classes = useStyles();
-
-    useEffect(() => {
-     console.log(records)
-    }, [])
+   const {txt_rec,ns_rec,mx_rec,a_rec}= useContext(context)
+    
+      const [dense, setDense] = React.useState(false);
+  const [secondary, setSecondary] = React.useState(false);
+   
     return (
-    
-        <div>
-          <div style={{backgroundColor: '#8c8e91'}} className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar style={{display:'flex',justifyContent:'space-between'}}>
-        <div>
-        <Typography variant="h5" noWrap>
-          Records  <span></span>
-          </Typography>
-        </div>
-          <Dashboard_back/>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor="left"
-      >
-        <div className={classes.toolbar} />
-        <Divider />
+       <div>   
+   
 
-        <Divider />
-    
-    
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-   {
-     records.map(el=>{
-     
-         return(
-        <h7 style={{color:'white'}}>{el}</h7>
-         )
-         
-})}
-      </main>
+<Box sx={12}>
+   
+      <Grid container spacing={10}>
+        <Grid style={{width:'800px'}} item xs={12} md={6}>
+          <Typography sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
+          Text_Records
+          </Typography>
+          <Demo>
+            <List dense={dense}>
+               {txt_rec.map(el=>{
+               return(
+             <ListItem>
+             <ListItemIcon>
+                    <FolderIcon />
+                  </ListItemIcon>
+                  
+                  <ListItemText className='records_links'
+                    primary={el}
+                    
+                  />
+                </ListItem>
+
+               )
+               })}
+             </List>
+          </Demo>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Typography sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
+            NS_Records
+          </Typography>
+          <Demo>
+            <List dense={dense}>
+              {ns_rec.map(el=>{
+               return(
+                <ListItem>
+                  <ListItemIcon>
+                    <FolderIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                  className='records_links'
+                    primary={el}
+                    secondary={secondary ? 'Secondary text' : null}
+                  />
+                </ListItem>
+               )
+              })}
+            </List>
+          </Demo>
+        </Grid>
+      </Grid>
+      <Grid container spacing={10}>
+        <Grid item xs={12} md={6}>
+          <Typography sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
+            MX_Records
+          </Typography>
+          <Demo>
+            <List dense={dense}>
+             {mx_rec.map(el=>{
+               return(
+                <ListItem>
+                  <ListItemIcon>
+                    <FolderIcon />
+                  </ListItemIcon>
+                  <a style={{textDecoration:'none'}}href={el}>
+                  <ListItemText
+                  className='records_links'
+                    primary={el}
+                    secondary={secondary ? 'Secondary text' : null}
+                  />
+                   </a>
+                </ListItem>
+               
+               )
+              })}
+            </List>
+          </Demo>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Typography sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
+            A_Records
+          </Typography>
+          <Demo>
+            <List dense={dense}>
+              {a_rec.map(el=>{
+               return(
+                <ListItem>
+                  <ListItemIcon>
+                    <FolderIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                  className='records_links'
+                    primary={el}
+                    secondary={secondary ? 'Secondary text' : null}
+                  />
+                </ListItem>
+               )
+              })}
+            </List>
+          </Demo>
+        </Grid>
+      </Grid>
+    </Box>
+
+
+
+
+{/* <Grid>
+
+<Grid>
+<h1>txt_rec</h1>
+{
+  txt_rec.map(el=>{
+    return(
+  <h3>{el}</h3>
+    )
+  
+  })
+}
+</Grid>
+
+<Grid>
+
+<h1>ns_rec</h1>
+{
+  ns_rec.map(el=>{
+    return(
+  <h3>{el}</h3>
+    )
+  
+  })
+}
+</Grid>
+
+<Grid>
+<h1>mx_rec</h1>
+{
+  mx_rec.map(el=>{
+    return(
+  <h3>{el}</h3>
+    )
+  
+  })
+}
+</Grid>
+
+
+</Grid> */}
+
+      
     </div>
         
          
               
-        </div>
+    
     )
 }

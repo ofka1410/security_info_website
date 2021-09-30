@@ -2,13 +2,21 @@
     /* height: 100%; */
     height: 100%;
     width:100%;
-    background-color: #8c8e91;
+    background-color: #acadaf;
     display: flex;
 justify-content:center;
 align-items:center;
 margin:auto;
     flex-direction:row; 
     margin-top:60px;
+    font-family: 'Lato', sans-serif;
+    
+}
+.nav-icon{
+    width:40px !important;
+    height: 40px !important;
+    color:  #e7e7ee !important;
+    text-decoration:none
 }
 
 .links{
@@ -27,6 +35,20 @@ margin:auto;
 .git-warper{
     margin:10px;
 }
+.records_links{
+    color:#7f96ad !important;
+ font-size:18px !important;
+ font-weight:600;
+}
+
+ .records{
+    font-size:16px !important;
+    color:#c6d8f5 !important
+}
+.span-rec{
+    color:#e7e7ee;
+    margin-right:5px;
+}
 
 .forward-warper{
     background-color:#e0e0e4 !important;
@@ -38,3 +60,10 @@ margin:auto;
     font-size: 17px !important;
     color:#e7e7ee !important;
 }
+/* .navbar__link--active{
+    width:100% !important;
+   
+    height:100%;
+    text-align: center;
+    background-color:#acadaf;
+} */

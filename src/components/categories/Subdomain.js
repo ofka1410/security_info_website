@@ -61,26 +61,7 @@ export default function Subdomain() {
 
     return (
              <div>
-          <div style={{backgroundColor: '#8c8e91'}} className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar style={{display:'flex',justifyContent:'space-between'}}>
-        <div>
-        <Typography variant="h5" noWrap>
-          Subdomain <span></span>
-          </Typography>
-        </div>
-          <Dashboard_back/>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor="left"
-      >
+         
         <div className={classes.toolbar} />
        
         {Object.keys(subdomain).map(function(keyName){
@@ -99,9 +80,7 @@ export default function Subdomain() {
    )
  })}
  
-    <Side_icons/>
-      </Drawer>
-      <main className={classes.content}>
+    
         <div className={classes.toolbar} />
         <div style={{width:'1000px',textAlign:'left'}} className='git-paper'>
 
@@ -131,8 +110,7 @@ export default function Subdomain() {
         </>
    :<h2 style={{color:'#4d4e4f'}}>Choose one of the results on the side bar</h2>}
      </div>
-      </main>
-    </div>
+     
         
          
               

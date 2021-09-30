@@ -1,7 +1,7 @@
 import React,{useContext} from 'react'
 import { Fragment } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import {Grid,Container} from '@material-ui/core';
+import {Grid,Container,Popover} from '@material-ui/core';
 import {NavLink} from "react-router-dom";
 import {context} from '../../UseContext'
 import DashboardIcon from '@material-ui/icons/Dashboard';
@@ -10,10 +10,26 @@ import '../../css/landingPage.css'
 import { Drawer,CssBaseline
 ,AppBar,Toolbar,List,Typography,Divider,ListItem} from '@material-ui/core';
 import Side_icons from '../Side_icons'
-import ExpandMoreOutlinedIcon from '@material-ui/icons/ExpandMoreOutlined';
-
+import GitHubIcon from '@material-ui/icons/GitHub';
+import HttpIcon from '@material-ui/icons/Http';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import { FcDataConfiguration } from 'react-icons/fc';
+import Allip from './Allip'
 import '../../css/main.css'
-const drawerWidth = 180;
+import Main_dash from './Main_dash';
+import Mail from '../categories/Mail'
+import Github from '../categories/Github'
+import Records from '../categories/Records'
+import Subdomain from '../categories/Subdomain'
+import Sort from './Sort'
+
+
+import Data from '../categories/Data'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route} from "react-router-dom";
+const drawerWidth = 80;
 
 const useStyles = makeStyles({
     card: {
@@ -37,6 +53,7 @@ const useStyles = makeStyles({
     },
     root: {
     display: 'flex',
+   
         
    
   },
@@ -47,11 +64,12 @@ const useStyles = makeStyles({
 
   },
   toolbar:{
-    marginTop:'60px'
+    marginTop:'50px'
   },
   drawer: {
     width: 220,
     flexShrink: 10,
+    backgroundColor:'#acadaf',
   },
   drawerPaper: {
     width: drawerWidth,
@@ -65,8 +83,8 @@ const useStyles = makeStyles({
   content: {
     flexGrow: 1,
     // padding: theme.spacing(3),
-    height:"100vh",
-    backgroundColor:'#8c8e91',
+  
+    backgroundColor:'#acadaf',
     width:'100%',
     
     justifyContent:'center'
@@ -75,29 +93,47 @@ const useStyles = makeStyles({
   });
 
 export default function Dashboard() {
-    const {results,gitrepo,gitpass,gitoken,gitkey,mailShow,allip,records,domain,subdomain,data_res}= useContext(context)
+  
+     const [anchorEl, setAnchorEl] = React.useState(null);
+     const [popValue, setPopValue] = React.useState('');
+    const {results,setOpenDialog,openDialog}= useContext(context)
     const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
+
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget); 
+    };
+  
+    const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+   
     
     return (
+      <Router>
       <Container >
          <div>
           <div style={{backgroundColor: '#8c8e91'}} className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar style={{display:'flex',justifyContent:'space-between'}}>
+       
           <Typography variant="h5" noWrap>
-          
+           <NavLink className='nav-icon' exact to='/'>
          Dashboard <span>< DashboardIcon/></span>
-          </Typography>
-                 <div style={{marginLeft:'5px'}} className='flex-div'>
+          </NavLink>
+          </Typography>  
+         
+                 <div style={{marginLeft:'5px',marginTop:'5px'}} className='flex-div'>
            <div>
            <VpnLockIcon className='header-icon'/>
            </div>
+          
             <div>
             <h3>Logo</h3>
            </div>
- 
+
            </div>
             
           
@@ -119,282 +155,117 @@ export default function Dashboard() {
                 results.map(el=>{
                 return(
                   <>
-                <List>
+              <>
+                <List className='nav_link'  style={{height:'65px',width:'100%'}}>
             <ListItem button >
-           <NavLink  className='nav_link'    exact
-            activeClassName="navbar__link--active"  to={el.path}>{el.name}</NavLink>
-            </ListItem>
-        </List>
-        <Divider/>
+            {el.name== 'Allip'?
+           
+               <NavLink aria-owns={open ? 'mouse-over-popover' : undefined}
+               onMouseEnter={handleClick} className='nav_link'    exact
+               activeClassName="navbar__link--active" onClick={()=>{setOpenDialog(true)}}  to={'/'}>{el.name}</NavLink>
+            
+           
+               :el.name=='Github'?
+
+               <NavLink aria-owns={open ? 'mouse-over-popover' : undefined}
+               className='nav_link'  onMouseEnter={()=>{handleClick(el.name)}}   exact
+              activeClassName="navbar__link--active"  to={el.path}><GitHubIcon className='nav-icon'/></NavLink>
+              
+              :el.name == 'Emails'?
+
+              <NavLink aria-owns={open ? 'mouse-over-popover' : undefined}
+              onMouseEnter={()=>{handleClick(el.name)}} className='nav_link'    exact
+              activeClassName="navbar__link--active"  to={el.path}><MailOutlineIcon className='nav-icon'/></NavLink>
+
+            :el.name == 'Subdomains'? 
+
+            <NavLink aria-owns={open ? 'mouse-over-popover' : undefined}
+            onMouseEnter={()=>{handleClick(el.name)}} className='nav_link'    exact
+            activeClassName="navbar__link--active"  to={el.path}><HttpIcon className='nav-icon' /></NavLink>
+
+          :el.name=='Records'?
+
+          <NavLink aria-owns={open ? 'mouse-over-popover' : undefined}
+          onMouseEnter={()=>{handleClick(el.name)}} className='nav_link'    exact
+          activeClassName="navbar__link--active"  to={el.path}><img
+          className='nav-icon' 
+           src='https://res.cloudinary.com/df2pklfox/image/upload/v1632391274/dik2kyy9o5yiqcv7zalt.png'/></NavLink>
+
+        :el.name =='Data'?
+        <NavLink aria-owns={open ? 'mouse-over-popover' : undefined}
+        onMouseEnter={()=>{handleClick(el.name)}}  className='nav_link'    exact
+        activeClassName="navbar__link--active"  to={el.path}><FcDataConfiguration className='nav-icon'/></NavLink>
+
+      :
+      <NavLink aria-owns={open ? 'mouse-over-popover' : undefined}
+ onMouseEnter={()=>{handleClick(el.name)}}  className='nav_link'    exact
+        activeClassName="navbar__link--active"  to={el.path}>{el.name}</NavLink>}
+               </ListItem>
+           </List>
+          
+           <Divider/>
+           
+           </>
+         
+        
+          <Divider/>
+         
         </>
               
                 )
                 })
              
          :<Fragment></Fragment>}
-      
-    
+
     <Side_icons/>
 
     
       </Drawer>
       <main className={classes.content}>
+              
+   
+        
+        {
+          openDialog?
+          <Allip/>
+        :<></>}
         <div className={classes.toolbar} />
-         <Grid  style={{display:'flex',flexDirection:'column',justifyContent:'center',marginLeft:'10%'}}>
-         
-         
-  <Grid  style={{marginTop:'10px',display:'flex',justifyContent:'center'}} xs={12}>
-          <Grid className='dash-box' style={{backgroundColor:'#e6ecf5',height:'280px'}} xs={12}>
-          <Grid>
-<Typography style={{color:'#7a7d80'}}  variant='h4'>
-Github
-</Typography>
-<Divider/>
-</Grid>
+        <div className='main-warper'>
+             
+                 <Switch>
+                 <Route path='/mailshow'>
+                     <Mail/>
+                 </Route>
+                 <Route path='/github'>
+                     <Github/>
+                 </Route>
+                 <Route path='/records'>
+                     <Records/>
+                 </Route>
+                 <Route path='/subdomain'>
+                     <Subdomain/>
+                 </Route>
+                 <Route path='/allip'>
+                     <Allip/>
+                 </Route>
+                 <Route path='/data'>
+                     <Data/>
+                 </Route>
+                    <Route path='/sort'>
+               <Sort/>
+                 </Route>
+                 <Route path='/'>
+                     <Main_dash/>
+                 </Route>
 
-
- <Grid xs={12} container spacing={2} style={{height:'210px',display:'flex',justifyContent:'center',marginTop:'5px'}}>
-
-<Grid  className='dash-box' className='git-warper' xs={2}> 
-
-<Grid>
-<Typography style={{color:'#7a7d80'}} variant='h5'>
-Git Keys
-</Typography>
-</Grid>
- { gitkey.splice(-1).map(item=>{
-                 return(
-                     
-                    <Grid>
-                     <Typography style={{ width:'140px'}}  variant="p" component="h2">
-                       <a className='links'  href={item}>{item}</a>
-                     </Typography> 
-                  
-                    </Grid>
-
-               )
-             })}
-
-
-</Grid>
-
-<Grid className='git-warper' xs={2}> 
-
-<Grid>
-<Typography style={{color:'#7a7d80'}} variant='h5'>
-Git Repository
-</Typography>
-</Grid>
- { gitrepo.splice(-1).map(item=>{
-                 return(
-                     
-                    <Grid>
-                     <Typography style={{ width:'140px'}}  variant="p" component="h2">
-                       <a className='links'  href={item}>{item}</a>
-                     </Typography> 
-                   
-                    </Grid>
-
-               )
-             })}
-
-
-</Grid>
-
-
-
-<Grid className='git-warper' xs={2}> 
-
-<Grid>
-<Typography style={{color:'#7a7d80'}} variant='h5'>
-Git Pass
-</Typography>
-</Grid>
- { gitpass.splice(-1).map(item=>{
-                 return(
-                     
-                    <Grid>
-                     <Typography style={{ width:'140px'}}  variant="p" component="h2">
-                       <a className='links'  href={item}>{item}</a>
-                     </Typography> 
-                  
-                    </Grid>
-
-               )
-             })}
-
-
-</Grid>
-
-<Grid  xs={2}> 
-
-<Grid>
-<Typography style={{color:'#7a7d80'}} variant='h5'>
-Git Token
-</Typography>
-</Grid>
- { gitoken.splice(-1).map(item=>{
-                 return(
-                     
-                    <Grid>
-                     <Typography style={{width:'140px'}}  variant="p" component="h2">
-                       <a className='links'  href={item}>{item}</a>
-                     </Typography> 
-                  
-                    </Grid>
-
-               )
-             })}
-
-
-</Grid>
-
-</Grid>
-
-
- <Grid className='forward-warper'>
-   <NavLink to='github' className='nav_link'    exact
-            activeClassName="navbar__link--active"><ExpandMoreOutlinedIcon  style={{color:'black',cursor:'pointer',fontWeight:'bold'}}/></NavLink>
- 
- </Grid>
- 
-              </Grid>
-            
-            </Grid>
-           <Grid style={{marginTop:'30px',display:'flex',justifyContent:'space-evenly'}} xs={12}>
-
-   <Grid  className='dash-box' style={{backgroundColor:'#e6ecf5',height:'220px'}} xs={3}>
-   <Grid>
-<Typography style={{color:'#4d4e4f'}} variant='h4'>
-Allip
-</Typography>
-</Grid>
-<Grid style={{height:'140px'}}>
-{allip.slice(-4).map(el=>{
-  return(
-    <Grid>
-      <p  style={{  fontSize:"14px",color:'#7a7d80',fontWeight:'700'}}>{el}</p>
-     </Grid>
-  )
-  
-})}
-</Grid>
-<Grid className='forward-warper'>
-   <NavLink to='allip' className='nav_link'    exact
-            activeClassName="navbar__link--active"><ExpandMoreOutlinedIcon style={{color:'black',cursor:'pointer',fontWeight:'bold'}}/></NavLink>
- 
- </Grid>
-    </Grid>
-
- <Grid  className='dash-box' style={{backgroundColor:'#626e80',height:'220px',}} xs={4}>
-<Grid>
-<Typography  variant='h4'>
-Data
-</Typography>
-</Grid>
-<Grid style={{height:'150px'}}>
-  {Object.keys(data_res).slice(-6).map(function(keyName, keyIndex){
-   return(
-     <Grid style={{display:'flex',justifyContent:'center'}}>
-     <Grid>
-      <Grid style={{marginTop:'7px'}}>
-      <a href={keyName} style={{color:'#e0fbff' , fontSize:"16px",fontWeight:'700'}}>{keyName}</a>
-     </Grid>
-     </Grid>
-    
-       <Divider />
-     </Grid>
-     
-   )
- })}
-</Grid>
-<Grid className='forward-warper'>
-   <NavLink to='data' className='nav_link'    exact
-            activeClassName="navbar__link--active"><ExpandMoreOutlinedIcon style={{color:'black',cursor:'pointer',fontWeight:'bold'}}/></NavLink>
- 
- </Grid>
-    </Grid>
-    <Grid  className='dash-box' style={{backgroundColor:'#a3a7ad',height:'220px'}} xs={4}>
-<Grid>
-<Typography  variant='h4'>
-Records
-</Typography>
-</Grid>
-<Grid style={{height:'150px'}}>
-</Grid>
-<Grid className='forward-warper'>
-   <NavLink to='records' className='nav_link'    exact
-            activeClassName="navbar__link--active"><ExpandMoreOutlinedIcon style={{color:'black',cursor:'pointer',fontWeight:'bold'}}/></NavLink>
- 
- </Grid>
-    </Grid>
-
-            </Grid>
-             <Grid style={{marginTop:'30px',display:'flex',justifyContent:'space-evenly',marginBottom:'30px'}} xs={12}>
-         
-          <Grid  className='dash-box' style={{backgroundColor:'#6f88ad',height:'220px'}} xs={7}>
-<Grid>
-<Typography  variant='h4'>
-Emails
-</Typography>
-</Grid>
-<Grid style={{height:'150px'}}>
-
-   {Object.keys(mailShow).slice(-6).map(function(keyName, keyIndex){
-   return(
-     <Grid style={{display:'flex',justifyContent:'center'}}>
-     <Grid>
-      <Grid style={{marginTop:'7px'}}>
-      <a href={keyName} style={{color:'#e0fbff' , fontSize:"16px",fontWeight:'700'}}>{keyName}</a>
-     </Grid>
-     </Grid>
-    
-       <Divider />
-     </Grid>
-     
-   )
- })}
- </Grid>
-<Grid className='forward-warper'>
-   <NavLink to='mailshow' className='nav_link'    exact
-            activeClassName="navbar__link--active"><ExpandMoreOutlinedIcon style={{color:'black',cursor:'pointer',fontWeight:'bold'}}/></NavLink>
- 
- </Grid>
-              </Grid>
-
-             <Grid  className='dash-box' style={{backgroundColor:'#dcdfe3',height:'220px'}} xs={4}>
-<Grid>
-<Typography style={{color:'#4d4e4f'}}  variant='h4'>
-Subdomains
-</Typography>
-</Grid>
-<Grid style={{height:'150px'}}>
-  {Object.keys(subdomain).slice(-6).map(function(keyName, keyIndex){
-   return(
-     <Grid style={{display:'flex',justifyContent:'center'}}>
-     <Grid>
-      <Grid style={{marginTop:'7px'}}>
-      <a href={keyName} style={{color:'#7f96ad' , fontSize:"16px",fontWeight:'700'}}>{keyName}</a>
-     </Grid>
-     </Grid>
-    
-       <Divider />
-     </Grid>
-     
-   )
- })}
-</Grid>
-<Grid className='forward-warper'>
-   <NavLink to='subdomain' className='nav_link'    exact
-            activeClassName="navbar__link--active"><ExpandMoreOutlinedIcon style={{color:'black',cursor:'pointer',fontWeight:'bold'}}/></NavLink>
- 
- </Grid>
-              </Grid>
-
-
-            </Grid>
-           
-         </Grid>
+              
+                 
+                 
+                 </Switch>
+             
+</div>
+        
+        
       </main>
     </div>
         
@@ -403,5 +274,6 @@ Subdomains
         </div>
       
        </Container>
+       </Router>
     )
 }

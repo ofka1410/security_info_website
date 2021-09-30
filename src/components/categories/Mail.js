@@ -6,6 +6,7 @@ import '../../css/github.css'
 import Dashboard_back from '../Dashboard_back'
 import {context} from '../../UseContext'
 import Email from './Sub_emails/Email'
+import '../../css/github.css'
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -47,66 +48,59 @@ export default function Mail() {
      const {mailShow}= useContext(context)
 
      useEffect(() => {
-    for (const key in mailShow) {
-      console.log(key)
-    console.log(mailShow[key]);
-}
+       console.log(mailShow)
     
      }, [])
 
 
 const email_choose = (objects)=>{
-setEmail(objects)
-console.log(email)
+
+
 }
 
     return (
-               <div>
-          <div style={{backgroundColor: '#8c8e91'}} className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar style={{display:'flex',justifyContent:'space-between'}}>
-        <div>
-        <Typography variant="h5" noWrap>
-          Emails  <span></span>
-          </Typography>
-        </div>
-          <Dashboard_back/>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor="left"
-      >
-        <div className={classes.toolbar} />
+               <Grid style={{width:'90%',display:'flex',justifyContent:'left'}}>
+      
+  
+       
+        <Grid xs={6}>
          {Object.keys(mailShow).map(function(keyName, keyIndex){
    return(
-     <Grid>
-     <Button onClick={()=>{email_choose(mailShow[keyName])}} style={{color:'white' , fontSize:"16px",variant:"outlined"}}>{keyName}</Button>
-       <Divider />
-     </Grid>
+     <>
+     {
+       email== mailShow[keyName]?
+         <List className='same-value'>
+            <ListItem button onClick={()=>{setEmail(mailShow[keyName])}} >
+           <a  className='same-value'    exact
+            activeClassName="link--active">{keyName}</a>
+            </ListItem>
+          <Divider style={{color:'black'}}/>
+        </List>
+
+    : <List className='sub-nav-links'>
+            <ListItem button onClick={()=>{setEmail(mailShow[keyName])}} >
+           <a  className='nav_link'    exact
+            activeClassName="link--active">{keyName}</a>
+            </ListItem>
+          <Divider style={{color:'black'}}/>
+        </List> }
+     </>
+     
      
    )
  })}
       
-
+</Grid>
         <Divider />
     
     
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
+     
+      
 <Email email={email}/>
 
-      </main>
-    </div>
+      
+    </Grid>
         
-         
-              
-        </div>
+             
     )
 }

@@ -12,10 +12,14 @@ function ContextProvider(props){
     const [ gitpass,setGitpass] =useState([]);
     const [ gitoken,setGitoken] =useState([]);
     const [ gitkey,setGitkey] =useState([]);
+    const [ txt_rec,setTxt_rec] =useState([]);
+    const [ ns_rec,setNs_rec] =useState([]);
+    const [mx_rec,setMx_rec] =useState([]);
+     const [a_rec,setA_rec] =useState([]);
      const [ subdomain,setSubdomain] =useState([]);
      const [ data_res,setData_res] =useState([]);
     const [results,setResults]=useState([])
-
+    const[openDialog,setOpenDialog]=useState(false)
 
 
 
@@ -28,23 +32,26 @@ function ContextProvider(props){
               console.log(data)
                
                 if(data.sucsses){
-                   
+                    setTxt_rec(data.txt_rec)
+                    setNs_rec(data.ns_rec)
+                    setMx_rec(data.mx_rec)
+                    setA_rec(data.a_rec)
                     setMailShow(data.mailShow)
                     setAllip(data.allip)
-                    setRecords(data.records) 
+                    setRecords({}) 
                     setGitrepo(data.gitrepo)
                     setGitpass(data.gitpass)
                     setGitoken(data.gitoken)
                     setGitkey(data.gitkey)
                     setData_res(data.data)
-                    setSubdomain(data.subdomain)
+                    setSubdomain({})
                     setProgress(false)
                   
                 const arr=[
                         {
                     name:"Subdomains",
                     path:'subdomain',
-                    result_number:data_res.length
+                    result_number:0
                         },
                         {
                             name:"Emails",
@@ -54,7 +61,7 @@ function ContextProvider(props){
                         {
                             name:"Records",
                             path:'records',
-                            result_number:data.records.length
+                            result_number:0
                         },
                         {
                             name:"Github",
@@ -91,7 +98,8 @@ function ContextProvider(props){
     }
     const value={
         domain,setDomain,integrate_ohad,isDomain,mailShow,allip,records,
-        gitrepo,gitpass,gitoken,gitkey,open,setOpen,progress,results,setIsDomain,data_res,subdomain
+        gitrepo,gitpass,gitoken,gitkey,open,setOpen,progress,results,setIsDomain,data_res,subdomain,
+        openDialog,setOpenDialog,txt_rec,ns_rec,mx_rec,a_rec
     }
     return(
         <context.Provider value={value}>

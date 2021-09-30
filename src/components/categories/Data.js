@@ -63,35 +63,10 @@ export default function Data() {
   }, [])
     return (
               <div>
-          <div style={{backgroundColor: '#8c8e91'}} className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar style={{display:'flex',justifyContent:'space-between'}}>
-        <div>
-        <Typography variant="h5" noWrap>
-          Data  <span></span>
-          </Typography>
-        </div>
-          <Dashboard_back/>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor="left"
-      >
-        <div className={classes.toolbar} />
-        <Divider />
-
-        <Divider />
-        <div style={{height:'60%'}}></div>
-     <Side_icons/>
+         
+     
     
-      </Drawer>
-      <main className={classes.content}>
+     
         <div className={classes.toolbar} />
         
          <TableContainer style={{ boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px' }}  component={Paper}>
@@ -140,11 +115,7 @@ export default function Data() {
         </TableBody>
       </Table>
     </TableContainer>
-      </main>
-    </div>
-        
-         
-              
+           
         </div>
     )
 }

@@ -34,3 +34,21 @@
     margin-right: 10px;
     color: rgb(104, 110, 172)
 }
+
+.emails-results{
+    overflow-wrap: break-word;
+    color:#637296 !important;
+    margin-top:10px
+}
+
+.same-value{
+    color:#637296 !important;
+    text-decoration:none;
+    font-size:20px !important;
+    
+}
+.git-headers-warper{
+    width:100%;
+    text-align:center;
+    margin-left:20px;
+}
