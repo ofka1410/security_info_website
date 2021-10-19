@@ -19,7 +19,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import FolderIcon from '@mui/icons-material/Folder';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import '../../css/main.css'
 
 function generate(element) {
   return [0, 1, 2].map((value) =>
@@ -48,11 +48,13 @@ export default function Records() {
    
       <Grid container spacing={10}>
         <Grid style={{width:'800px'}} item xs={12} md={6}>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
+          
+          <Demo>
+          <Typography style={{color:'#637296'}} sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
           Text_Records
           </Typography>
-          <Demo>
             <List dense={dense}>
+           
                {txt_rec.map(el=>{
                return(
              <ListItem>
@@ -72,10 +74,11 @@ export default function Records() {
           </Demo>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
+         
+          <Demo>
+          <Typography style={{color:'#637296'}} sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
             NS_Records
           </Typography>
-          <Demo>
             <List dense={dense}>
               {ns_rec.map(el=>{
                return(
@@ -97,10 +100,11 @@ export default function Records() {
       </Grid>
       <Grid container spacing={10}>
         <Grid item xs={12} md={6}>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
+          
+          <Demo>
+          <Typography style={{color:'#637296'}} sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
             MX_Records
           </Typography>
-          <Demo>
             <List dense={dense}>
              {mx_rec.map(el=>{
                return(
@@ -123,10 +127,11 @@ export default function Records() {
           </Demo>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
+        
+          <Demo>
+          <Typography style={{color:'#637296'}} sx={{ mt: 4, mb: 2 }} variant="h4" component="div">
             A_Records
           </Typography>
-          <Demo>
             <List dense={dense}>
               {a_rec.map(el=>{
                return(

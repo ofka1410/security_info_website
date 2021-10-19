@@ -47,16 +47,7 @@ export default function Mail() {
     const[email,setEmail]=useState([])
      const {mailShow}= useContext(context)
 
-     useEffect(() => {
-       console.log(mailShow)
-    
-     }, [])
-
-
-const email_choose = (objects)=>{
-
-
-}
+ 
 
     return (
                <Grid style={{width:'90%',display:'flex',justifyContent:'left'}}>

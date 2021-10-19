@@ -18,7 +18,7 @@ export default function Email({email}) {
                    )
                })
                 
-           :<h1 style={{color:'#7a7d80'}}>Choose one of the email address</h1> }
+           :<h2 style={{color:'#7a7d80'}}>Choose one of the email address</h2> }
            </Grid>
         </Grid>
     )

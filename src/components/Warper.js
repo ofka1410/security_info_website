@@ -17,9 +17,9 @@ export default function Warper() {
            
             {
                 !isDomain?
-                <div>
+               
                 <LandinPage/>
-              </div>
+              
            :<Fragment><Main/></Fragment>}
     
         </Fragment>

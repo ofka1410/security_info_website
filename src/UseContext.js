@@ -26,7 +26,7 @@ function ContextProvider(props){
         const integrate_ohad=async()=>{
             try{
                 setProgress(true)
-              const res= await fetch('http://localhost:9000/ohad')
+              const res= await fetch(process.env.REACT_APP_API_KEY)
         
               const data = await res.json()
               console.log(data)

@@ -20,7 +20,7 @@ export default function Main_dash() {
       </Grid>
       
       
-       <Grid xs={12} container spacing={2} style={{height:'210px',display:'flex',justifyContent:'center',marginTop:'5px'}}>
+       <Grid xs={12}  spacing={2} style={{height:'210px',display:'flex',justifyContent:'center',marginTop:'5px'}}>
       
       <Grid  className='dash-box' className='git-warper' xs={2}> 
       

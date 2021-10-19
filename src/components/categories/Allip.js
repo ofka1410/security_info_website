@@ -59,7 +59,7 @@ export default function Allip() {
       
       <Dialog  open={openDialog} onClose={handleClose}>
     
-        <h1 style={{color:'#4d4e4f'}}>All IP</h1>
+        <h1 style={{color:'#637296'}}>All IP</h1>
         <List style={{ width: '500px', maxWidth: 660, bgcolor: 'background.paper' }}>
         <Divider/>
    {allip.map(el=>{
@@ -71,7 +71,7 @@ export default function Allip() {
            
           </Avatar>
         </ListItemAvatar>
-        <ListItemText style={{color:'#4d4e4f'}} primary={el} secondary="IP" />
+        <ListItemText style={{color:'#637296'}} primary={el} secondary="IP" />
      
        </ListItem>
        <Divider/>

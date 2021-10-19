@@ -104,7 +104,7 @@ useEffect(() => {
       
 
       <div className='git-paper'>
-      <h1 style={{color:'#4d4e4f'}}>{title}</h1> 
+      <h1 style={{color:'#637296'}}>{title}</h1> 
        {
          git_now.length>0?
     

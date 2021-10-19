@@ -24,11 +24,11 @@ export default function Side_icons() {
     return (
         <Grid>
       
-         <Grid style={{marginTop:'20px'}}>
+         {/* <Grid style={{marginTop:'20px'}}>
           <SearchPage  
           />
           
-          </Grid>
+          </Grid> */}
 <Divider />
 <Grid style={{marginTop:'10px'}}>
  <IconButton onClick={()=>{setIsDomain(false)}}>

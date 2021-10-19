@@ -33,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
   },
   table: {
-    minWidth: 800,
+    minWidth: 1000,
+ 
     
   },
 
@@ -45,11 +46,11 @@ const useStyles = makeStyles((theme) => ({
 
   },
   // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
+  
   content: {
     flexGrow: 1,
-    paddingLeft: theme.spacing(3),
-    paddingRight: theme.spacing(3),
+    
+    
     marginBottom:'30px'
   
   },
@@ -69,7 +70,7 @@ export default function Data() {
      
         <div className={classes.toolbar} />
         
-         <TableContainer style={{ boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px' }}  component={Paper}>
+         <TableContainer style={{ boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px'}}  component={Paper}>
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow style={{height:'50px',backgroundColor:'#7a7d80'}}>
@@ -94,18 +95,18 @@ export default function Data() {
               return(
                
                 <TableRow key={keyName}>
-                  <TableCell component="th" scope="row">
+                  <TableCell className='table_cell' style={{color:'#637296'}} component="th" scope="row">
               {keyName}
                 </TableCell>
-                <TableCell  component="th" scope="row" align="center">{el.port ||'None'}</TableCell>
-                <TableCell  component="th" scope="row" align="center">{el.hostname ||'None'}</TableCell>
+                <TableCell className='table_cell' style={{color:'#637296'}}  component="th" scope="row" align="center">{el.port ||'None'}</TableCell>
+                <TableCell className='table_cell' style={{color:'#637296'}} component="th" scope="row" align="center">{el.hostname ||'None'}</TableCell>
 
-                <TableCell  component="th" scope="row" align="center">{el.domain ||'None'}</TableCell>
-                <TableCell  component="th" scope="row" align="center">{el.City ||'None'}</TableCell>
-                <TableCell  component="th" scope="row" align="center">{el.Country ||'None'}</TableCell>
-                <TableCell component="th" scope="row" align="center">{el.OS ||'None'}</TableCell>
-                <TableCell component="th" scope="row" align="center" >{el.ISP ||'None'}</TableCell>
-                 <TableCell component="th" scope="row" align="center" >{el.organization ||'None'}</TableCell>
+                <TableCell className='table_cell' style={{color:'#637296'}} component="th" scope="row" align="center">{el.domain ||'None'}</TableCell>
+                <TableCell className='table_cell' style={{color:'#637296'}} component="th" scope="row" align="center">{el.City ||'None'}</TableCell>
+                <TableCell className='table_cell' style={{color:'#637296'}} component="th" scope="row" align="center">{el.Country ||'None'}</TableCell>
+                <TableCell className='table_cell' style={{color:'#637296'}} component="th" scope="row" align="center">{el.OS ||'None'}</TableCell>
+                <TableCell className='table_cell' style={{color:'#637296'}} component="th" scope="row" align="center" >{el.ISP ||'None'}</TableCell>
+                 <TableCell className='table_cell' style={{color:'#637296'}} component="th" scope="row" align="center" >{el.organization ||'None'}</TableCell>
                  </TableRow>
               )
             })}

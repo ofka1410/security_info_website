@@ -1,8 +1,8 @@
-import React,{useContext} from 'react'
+import React,{useContext,useState} from 'react'
 import { Fragment } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import {Grid,Container,Popover} from '@material-ui/core';
-import {NavLink} from "react-router-dom";
+import {Grid,Container,Popover,IconButton} from '@material-ui/core';
+import {NavLink,Link} from "react-router-dom";
 import {context} from '../../UseContext'
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import VpnLockIcon from '@material-ui/icons/VpnLock';
@@ -22,6 +22,8 @@ import Github from '../categories/Github'
 import Records from '../categories/Records'
 import Subdomain from '../categories/Subdomain'
 import Sort from './Sort'
+import { BsFunnel } from 'react-icons/bs';
+import SearchPage from '../SearchPage';
 
 
 import Data from '../categories/Data'
@@ -83,8 +85,9 @@ const useStyles = makeStyles({
   content: {
     flexGrow: 1,
     // padding: theme.spacing(3),
+
   
-    backgroundColor:'#acadaf',
+    // backgroundColor:'#acadaf',
     width:'100%',
     
     justifyContent:'center'
@@ -97,6 +100,7 @@ export default function Dashboard() {
      const [anchorEl, setAnchorEl] = React.useState(null);
      const [popValue, setPopValue] = React.useState('');
     const {results,setOpenDialog,openDialog}= useContext(context)
+   
     const classes = useStyles();
 
     const handleClick = (event) => {
@@ -108,6 +112,10 @@ export default function Dashboard() {
   };
 
   const open = Boolean(anchorEl);
+  const handlePopoverOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
    
     
     return (
@@ -120,9 +128,9 @@ export default function Dashboard() {
         <Toolbar style={{display:'flex',justifyContent:'space-between'}}>
        
           <Typography variant="h5" noWrap>
-           <NavLink className='nav-icon' exact to='/'>
+           <Link className='nav-icon' exact to='/'>
          Dashboard <span>< DashboardIcon/></span>
-          </NavLink>
+          </Link>
           </Typography>  
          
                  <div style={{marginLeft:'5px',marginTop:'5px'}} className='flex-div'>
@@ -156,52 +164,58 @@ export default function Dashboard() {
                 return(
                   <>
               <>
-                <List className='nav_link'  style={{height:'65px',width:'100%'}}>
-            <ListItem button >
+               
             {el.name== 'Allip'?
            
-               <NavLink aria-owns={open ? 'mouse-over-popover' : undefined}
-               onMouseEnter={handleClick} className='nav_link'    exact
-               activeClassName="navbar__link--active" onClick={()=>{setOpenDialog(true)}}  to={'/'}>{el.name}</NavLink>
+               <Link style={{height:'10%',display:'flex',alignItems:'center',justifyContent:'center'}} aria-owns={open ? 'mouse-over-popover' : el.name}
+                  className='nav_link'    exact
+                  onMouseEnter={handlePopoverOpen}
+                   onMouseLeave={handlePopoverClose}
+               activeClassName="navbar__link--active" onClick={()=>{setOpenDialog(true)}}  to={'/'}>{el.name}</Link>
             
            
                :el.name=='Github'?
 
-               <NavLink aria-owns={open ? 'mouse-over-popover' : undefined}
-               className='nav_link'  onMouseEnter={()=>{handleClick(el.name)}}   exact
+               <NavLink    style={{height:'10%',display:'flex',alignItems:'center',justifyContent:'center'}} aria-owns={open ? 'mouse-over-popover' : el.name}
+               className='nav_link'  onMouseEnter={handlePopoverOpen}
+               onMouseLeave={handlePopoverClose}   exact
               activeClassName="navbar__link--active"  to={el.path}><GitHubIcon className='nav-icon'/></NavLink>
               
               :el.name == 'Emails'?
 
-              <NavLink aria-owns={open ? 'mouse-over-popover' : undefined}
-              onMouseEnter={()=>{handleClick(el.name)}} className='nav_link'    exact
+              <NavLink    style={{height:'10%',display:'flex',alignItems:'center',justifyContent:'center'}}  aria-owns={open ? 'mouse-over-popover' : undefined}
+              onMouseEnter={handlePopoverOpen}
+              onMouseLeave={handlePopoverClose} className='nav_link'    exact
               activeClassName="navbar__link--active"  to={el.path}><MailOutlineIcon className='nav-icon'/></NavLink>
 
             :el.name == 'Subdomains'? 
 
-            <NavLink aria-owns={open ? 'mouse-over-popover' : undefined}
-            onMouseEnter={()=>{handleClick(el.name)}} className='nav_link'    exact
+            <NavLink    style={{height:'10%',display:'flex',alignItems:'center',justifyContent:'center'}} aria-owns={open ? 'mouse-over-popover' : undefined}
+            onMouseEnter={handlePopoverOpen}
+        onMouseLeave={handlePopoverClose} className='nav_link'    exact
             activeClassName="navbar__link--active"  to={el.path}><HttpIcon className='nav-icon' /></NavLink>
 
           :el.name=='Records'?
 
-          <NavLink aria-owns={open ? 'mouse-over-popover' : undefined}
-          onMouseEnter={()=>{handleClick(el.name)}} className='nav_link'    exact
+          <NavLink   onMouseEnter={handlePopoverOpen}
+          onMouseLeave={handlePopoverClose} style={{height:'10%',display:'flex',alignItems:'center',justifyContent:'center'}} aria-owns={open ? 'mouse-over-popover' : undefined}
+           className='nav_link'    exact
           activeClassName="navbar__link--active"  to={el.path}><img
           className='nav-icon' 
            src='https://res.cloudinary.com/df2pklfox/image/upload/v1632391274/dik2kyy9o5yiqcv7zalt.png'/></NavLink>
 
         :el.name =='Data'?
-        <NavLink aria-owns={open ? 'mouse-over-popover' : undefined}
-        onMouseEnter={()=>{handleClick(el.name)}}  className='nav_link'    exact
+        <NavLink    style={{height:'10%',display:'flex',alignItems:'center',justifyContent:'center'}} aria-owns={open ? 'mouse-over-popover' : undefined}
+        onMouseEnter={handlePopoverOpen}
+        onMouseLeave={handlePopoverClose}  className='nav_link'    exact
         activeClassName="navbar__link--active"  to={el.path}><FcDataConfiguration className='nav-icon'/></NavLink>
 
       :
-      <NavLink aria-owns={open ? 'mouse-over-popover' : undefined}
- onMouseEnter={()=>{handleClick(el.name)}}  className='nav_link'    exact
+      <NavLink style={{height:'10%',display:'flex',alignItems:'center',justifyContent:'center'}} aria-owns={open ? 'mouse-over-popover' : undefined}
+      onMouseEnter={handlePopoverOpen}
+      onMouseLeave={handlePopoverClose} className='nav_link'    exact
         activeClassName="navbar__link--active"  to={el.path}>{el.name}</NavLink>}
-               </ListItem>
-           </List>
+           
           
            <Divider/>
            
@@ -214,14 +228,44 @@ export default function Dashboard() {
               
                 )
                 })
-             
+          
          :<Fragment></Fragment>}
+            <NavLink exact
+            to='sort'>
+      
+        <IconButton aria-owns={open ? 'mouse-over-popover' : undefined}
+        aria-haspopup="true"
+        onMouseEnter={handlePopoverOpen}
+        onMouseLeave={handlePopoverClose}>
+           <BsFunnel className='header-icon'/>
+           </IconButton>
+            </NavLink>
+           <Popover
+        id="mouse-over-popover"
+        sx={{
+          pointerEvents: 'none',
+        }}
+        open={open}
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus
+      >
+        <Typography sx={{ p: 1 }}>Sort/Search</Typography>
+      </Popover>
 
     <Side_icons/>
 
     
       </Drawer>
-      <main className={classes.content}>
+      <main id='content' className={classes.content}>
               
    
         
@@ -257,10 +301,6 @@ export default function Dashboard() {
                  <Route path='/'>
                      <Main_dash/>
                  </Route>
-
-              
-                 
-                 
                  </Switch>
              
 </div>

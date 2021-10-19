@@ -6,7 +6,7 @@ import { Grid,Divider } from '@material-ui/core';
 import Header from '../headers/Header'
 import HighlightOutlinedIcon from '@material-ui/icons/HighlightOutlined';
 import ReplyOutlinedIcon from '@material-ui/icons/ReplyOutlined';
-import Side_icons from '../Side_icons'
+// import Side_icons from '../Side_icons'
 
 export default function LandinPage() {
     return (
@@ -16,7 +16,7 @@ export default function LandinPage() {
   </Grid>
    <Grid style={{display:'flex'}}>
   <Grid className='side' >
- <Side_icons/>
+ {/* <Side_icons/> */}
 
   </Grid>
     <Grid xs={12}>

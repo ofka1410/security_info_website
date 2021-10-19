@@ -1,7 +1,7 @@
 .loader_warper{
     position: fixed;
-    top: 40%;
-    left:45%;
+    top: 35%;
+    left:40%;
     z-index: 1000;
     /* color: #e6531d; */
 }

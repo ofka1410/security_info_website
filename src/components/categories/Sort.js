@@ -2,23 +2,41 @@ import React,{useContext,useState} from 'react'
 import {context} from '../../UseContext'
 import {Grid,Container,Typography,Divider,TextField} from '@material-ui/core';
 import '../../css/landingPage.css'
+import SortResults from './SortResults';
+
 import SearchIcon from '@mui/icons-material/Search';
 export default function Sort() {
      const {results,gitrepo,gitpass,gitoken,gitkey,mailShow,allip,records,
     domain,subdomain,data_res,setOpenDialog,openDialog,txt_rec,ns_rec,mx_rec,a_rec}= useContext(context)
     const [subject,setSubject]=useState('')
-
-    const search_results=(e)=>{
+     const[isSearch,setIsSearch]=useState(false)
+    const[arrResults,setArrResults]=useState([])
+     const search_results=(e)=>{
+       setIsSearch(true)
         let e_Value=e
-        
-        
+
         console.log(e_Value)
         if(subject=='Data'){
         const results_data_res= data_sort(e_Value)
+        if(results_data_res.length){
+        setArrResults(results_data_res)
         console.log(results_data_res)
+        }
+        else{
+          setArrResults([])
+        }
+       
         }
         else if(subject=='Github'){
        const git= github_sort(e_Value)
+       if(Object.keys(git).length !== 0){
+        setArrResults(git)
+       }
+         else{
+          setArrResults([])
+        }
+     
+       
        console.log(git)
        return;
         }
@@ -26,21 +44,46 @@ export default function Sort() {
            subdomain_sort(e_Value)
         }
          else if(subject=='Records'){
-          records_sort(e_Value)
-          
+         const records= records_sort(e_Value)
+         if(Object.keys(records).length !== 0){
+             setArrResults(records)
+         }
+
+          else{
+          setArrResults([])
         }
+          console.log(records)
+          return;
+        }
+
+
         else if(subject=='Emails'){
          const email_results = mail_sort(e_Value)
           console.log(email_results)
+          if(email_results.length){
+          setArrResults(email_results)
           return;
+          }
+          else{
+            setArrResults([])
+          }
+         
         }
         else if(subject=='Allip'){
           console.log(allip)
          const ip_r = ip_sort(e_Value)
+         if(ip_r.length){
+         setArrResults(ip_r)
+         }
+         else{
+          setArrResults([]) 
+         }
+         
          console.log(ip_r)
          return;
 
         }
+        
     }
     
     const github_sort =(value)=>{
@@ -61,7 +104,7 @@ export default function Sort() {
         }
           const token= gitoken.filter(el=>el.includes(value))
             if(token.length){
-          git_results.gittoken.push(...token)
+          git_results.gitoken.push(...token)
         }
            const key= gitkey.filter(el=>el.includes(value))
            if(key.length){
@@ -75,23 +118,32 @@ export default function Sort() {
       console.log(mailShow)
        let results_data=[]
       console.log(data_res)
+      console.log(value)
          Object.keys(mailShow).map(function(keyName){
+           console.log(keyName)
            if(keyName.includes(value)){
-            results_data.push({keyName:mailShow[keyName]})
+            results_data.push(...mailShow[keyName])
            }
          })
+         
          return results_data
 
     }
-    const 
-    data_sort =(value)=>{
+    const data_sort =(value)=>{
       let results_data=[]
-      console.log(data_res)
-         Object.keys(data_res).map(function(keyName){
+      
+          Object.keys(data_res).map(function(keyName,index){
            if(keyName.includes(value)){
-            results_data.push({keyName:data_res[keyName]})
+            //  data_res[keyName]= {...data_res[keyName],ip:keyName}
+            results_data.push(data_res[{keyName}])
+            
+            console.log(results_data)
+          
            }
          })
+      
+      
+          console.log(results_data)
          return results_data
 
     }
@@ -104,9 +156,49 @@ export default function Sort() {
     const subdomain_sort =(value)=>{
       
     }
+
+
     const records_sort =(value)=>{
+     // txt_rec,ns_rec,mx_rec,a_rec
+     let arr={
+       a_records:[],
+       txt_records:[],
+       ns_records:[],
+        mx_records:[]
+
+     }
+
+     
+     
+      const a_records = a_rec.filter(el=>el.includes(value))
+        if(a_records.length){
+            arr.a_records=a_records
+        }
+      const txt_records = txt_rec.filter(el=>el.includes(value))
+
+      if(txt_records.length){
+          console.log(txt_records)
+          arr.txt_records=txt_records
+      }
+      const ns_records = ns_rec.filter(el=>el.includes(value))
+
+      if(ns_records.length){
+        
+        arr.ns_records = ns_records
+      }
+      const mx_records = mx_rec.filter(el=>el.includes(value))
+
+       if(mx_records.length){
+       
+        arr.mx_records=mx_records
+      }
+     
+        return arr;
       
-    }
+      
+        }
+    
+    
     
     
     return (
@@ -114,7 +206,9 @@ export default function Sort() {
        <div className='integrate-warper'>
           <div className='sort-warper'>
         <div style={{width:'90%'}}>
+        
            <TextField 
+          
            onChange={(e)=>{search_results(e.target.value)}}
            InputProps={{
     endAdornment: (
@@ -137,6 +231,15 @@ export default function Sort() {
         </div>
         </div>
         </div>
+        <Grid xs={12}>
+         {isSearch?
+         <SortResults
+         subject={subject}
+         arrResults={arrResults}
+          />
+         :<></>}
+        
+        </Grid>
         </Grid>
     )
 }
